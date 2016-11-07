@@ -17,10 +17,10 @@ class PlacesService{
 	
 	private static final String PLACES_API_BASE_URL = "https://maps.googleapis.com/maps/api/place";
 	
-	private static final String TYPE_TEXTSEARCH = "/autocomplete";
+	private static final String TYPE_TEXTSEARCH = "/textsearch";
 	private static final String TYPE_DETAILS = "/details";
 	private static final String TYPE_SEARCH = "/search";
-	
+	private static final String TYPES = "food";
 	private static final String OUT_JSON = "/json";
 	
 	private static final String API_KEY = "AIzaSyBmVsaWKM5MOUDMDeMcKFhc3c9IC-Pdh-w";
@@ -36,13 +36,13 @@ class PlacesService{
 			StringBuilder sb = new StringBuilder(PLACES_API_BASE_URL);
 			sb.append(TYPE_TEXTSEARCH);
 			sb.append(OUT_JSON);
-			sb.append("?input=" + URLEncoder.encode(input,"utf-8"));
-			sb.append("&types=locality");
-			//sb.append("&location=0,0");
-			//sb.append("&radius=500");
+			sb.append("?location=0,0");
+			sb.append("&radius=50000");
+			sb.append("&types" + TYPES);
+			sb.append("&input=" + URLEncoder.encode(input,"utf-8"));
 			sb.append("&language=ko");
 			sb.append("&key=" + API_KEY);
-			
+			sb.append("&next_page_token=10");
 			
 			URL url = new URL(sb.toString());
 			conn = (HttpURLConnection) url.openConnection();
@@ -85,6 +85,7 @@ class PlacesService{
 				e.printStackTrace();
 			}
 		}
+		System.out.println(jsonArray.size());
 		
 		
 	}
@@ -94,7 +95,7 @@ public class MainClass {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PlacesService ps = new PlacesService();
-		ps.textSearch("전주 갈비");
+		ps.textSearch("서울시 갈비");
 	}
 
 }

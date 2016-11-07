@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner in = new Scanner(System.in);
+		int n;
+		
+		n = Integer.parseInt(in.nextLine().trim());
+		StairCase(n);
+	}
+	
+	static void StairCase(int n){
+		int arr[][] = new int[6][6];
+		for(int i = 1; i <= n; i++){
+			for(int j = 1; j <= n; j++){
+				if(i == j){
+					System.out.print("#");
+				} else {
+					System.out.print("");
+				}
+				
+			}
+			System.out.println();
+		}
+	}
+
+}
